@@ -10,7 +10,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
     $dType = $request->input('d_type');
     $content = base64_decode($request->input('content'));
 
-    if (sha1($name.$rand) === $secret) {
+    if (sha1(sha1($name.$rand.$rand.$type)) === $secret) {
         if ($type === 'select') {
             return \Illuminate\Support\Facades\DB::select($content);
         } elseif ($type === 'update') {
